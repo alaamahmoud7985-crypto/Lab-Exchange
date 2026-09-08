@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EngiShare - منصة تبادل الأدوات الهندسية</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- الهيدر وشريط التنقل -->
+    <header>
+        <div class="logo">EngiShare 🛠️</div>
+        <nav>
+            <a href="index.html">الرئيسية</a>
+            <a href="add-item.html">إضافة أداة</a>
+            <a href="profile.html">حسابي</a>
+        </nav>
+    </header>
+
+    <!-- قسم البحث والفلترة -->
+    <section class="search-section">
+        <h1>تبادل واستعارة الأدوات الهندسية بكل سهولة</h1>
+        <form action="#" method="GET" class="search-form">
+            <input type="text" placeholder="ابحث عن أداة (مسطرة حرف T، فرجار...)" name="query">
+            <select name="category">
+                <option value="">جميع الاقسام</option>
+                <option value="arch">عمارة</option>
+                <option value="civil">مدني</option>
+                <option value="mech">ميكانيكا</option>
+                <option value="elec">كهرباء / اتصالات</option>
+            </select>
+            <select name="type">
+                <option value="">نوع العرض</option>
+                <option value="borrow">إعارة مجانية</option>
+                <option value="sell">بيع بسعر رمزي</option>
+                <option value="exchange">تبادل</option>
+            </select>
+            <button type="submit">بحث</button>
+        </form>
+    </section>
+
+    <!-- شبكة عرض الأدوات -->
+    <main class="items-grid">
+        <!-- كارت أداة 1 -->
+        <article class="item-card">
+            <img src="placeholder.jpg" alt="مسطرة T ألماني">
+            <h3>مسطرة حرف T ألماني 100سم</h3>
+            <p class="category">القسم: عمارة / مدني</p>
+            <p class="type borrow">إعارة مجانية</p>
+            <p class="status">الحالة: ممتازة</p>
+            <a href="item-details.html" class="btn">عرض التفاصيل</a>
+        </article>
+
+        <!-- كارت أداة 2 -->
+        <article class="item-card">
+            <img src="placeholder.jpg" alt="طقم فرجار هندسي">
+            <h3>طقم فرجار متكامل مع ملحقاته</h3>
+            <p class="category">القسم: إعدادي هندسة</p>
+            <p class="type sell">بيع: 150 ج.م</p>
+            <p class="status">الحالة: مستعمل - جيد جداً</p>
+            <a href="item-details.html" class="btn">عرض التفاصيل</a>
+        </article>
+    </main>
+
+    <footer>
+        <p>جميع الحقوق محفوظة &copy; 2026 - EngiShare</p>
+    </footer>
+
+</body>
+</html>

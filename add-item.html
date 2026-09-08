@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إضافة أداة جديدة - EngiShare</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <div class="logo">EngiShare 🛠️</div>
+        <nav>
+            <a href="index.html">الرئيسية</a>
+            <a href="add-item.html">إضافة أداة</a>
+            <a href="profile.html">حسابي</a>
+        </nav>
+    </header>
+
+    <main class="form-container">
+        <h2>إضافة أداة هندسية للتبادل أو الإعارة</h2>
+
+        <form action="#" method="POST" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="title">اسم الأداة:</label>
+                <input type="text" id="title" name="title" required placeholder="مثال: لوحة رسم هندسي A1">
+            </div>
+
+            <div class="form-group">
+                <label for="category">التصنيف / القسم:</label>
+                <select id="category" name="category" required>
+                    <option value="">اختر القسم</option>
+                    <option value="general">إعدادي هندسة</option>
+                    <option value="architecture">عمارة</option>
+                    <option value="civil">مدني</option>
+                    <option value="electrical">كهرباء وحاسبات</option>
+                    <option value="mechanical">ميكانيكا</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="listing_type">نوع العرض:</label>
+                <select id="listing_type" name="listing_type" required>
+                    <option value="borrow">إعارة مجانية</option>
+                    <option value="sell">بيع بسعر رمزي</option>
+                    <option value="exchange">تبادل بأداة أخرى</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="price">السعر (إذا كان بيع):</label>
+                <input type="number" id="price" name="price" placeholder="0.00">
+            </div>
+
+            <div class="form-group">
+                <label for="condition">حالة الأداة:</label>
+                <select id="condition" name="condition" required>
+                    <option value="new">جديدة لم تستخدم</option>
+                    <option value="like_new">شبه جديدة</option>
+                    <option value="used">مستعملة بحالة جيدة</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="description">وصف الأداة:</label>
+                <textarea id="description" name="description" rows="5" placeholder="اكتب تفاصيل الأداة، مكان التسليم داخل الكلية..."></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="images">صور الأداة:</label>
+                <input type="file" id="images" name="images" multiple accept="image/*">
+            </div>
+
+            <button type="submit" class="btn-submit">نشر الأداة</button>
+        </form>
+    </main>
+
+</body>
+</html>
