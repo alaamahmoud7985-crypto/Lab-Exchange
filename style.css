@@ -1,0 +1,306 @@
+/* ==========================================
+   تنسيقات منصة سلفني شكراً - النسخة المتقدمة 🛠️
+   ========================================== */
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap');
+
+:root {
+    --primary-color: #0d3b66;
+    --secondary-color: #0a9396;
+    --accent-color: #ee9b00;
+    --accent-hover: #ca6702;
+    --bg-gradient: linear-gradient(135deg, #f0f4f8 0%, #e2eafc 100%);
+    --card-bg: rgba(255, 255, 255, 0.95);
+    --text-main: #2d3748;
+    --text-muted: #718096;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Cairo', sans-serif;
+}
+
+body {
+    background: var(--bg-gradient);
+    color: var(--text-main);
+    direction: rtl;
+    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* الهيدر وشريط التنقل */
+header {
+    background: linear-gradient(90deg, #0d3b66 0%, #1d3557 100%);
+    color: white;
+    padding: 1.2rem 2.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+header .logo {
+    font-size: 1.9rem;
+    font-weight: 800;
+    color: #f4a261;
+    letter-spacing: -0.5px;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+nav a {
+    color: #f8f9fa;
+    text-decoration: none;
+    margin-right: 25px;
+    font-weight: 700;
+    font-size: 1.05rem;
+    padding: 6px 14px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+nav a:hover {
+    color: #ffffff;
+    background-color: rgba(255, 255, 255, 0.15);
+    transform: translateY(-2px);
+}
+
+/* قسم البحث والتجميع بالهيدر */
+.search-section {
+    background: linear-gradient(135deg, #0d3b66 0%, #0a9396 100%);
+    color: white;
+    padding: 3rem 2rem;
+    margin: 35px auto;
+    width: 90%;
+    max-width: 950px;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 10px 25px rgba(10, 147, 150, 0.25);
+}
+
+.search-section h1 {
+    font-size: 2.2rem;
+    font-weight: 800;
+    margin-bottom: 15px;
+}
+
+.search-form {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    margin-top: 20px;
+    flex-wrap: wrap;
+}
+
+.search-form input,
+.search-form select {
+    padding: 12px 18px;
+    border: 2px solid transparent;
+    border-radius: 10px;
+    font-size: 1rem;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+/* جعل خيار الـ Placeholder يبدو بلون رمادي مريح */
+select:invalid, select option[value=""] {
+    color: #a0aec0;
+}
+
+select option {
+    color: #2d3748;
+}
+
+.search-form input:focus,
+.search-form select:focus {
+    border-color: #ee9b00;
+    box-shadow: 0 0 8px rgba(238, 155, 0, 0.4);
+}
+
+.search-form button {
+    background: linear-gradient(135deg, #ee9b00 0%, #ca6702 100%);
+    color: white;
+    border: none;
+    padding: 12px 28px;
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.search-form button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(202, 103, 2, 0.4);
+}
+
+/* شبكة الكروت (الأدوات) */
+.items-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+    width: 90%;
+    max-width: 1150px;
+    margin: 30px auto;
+}
+
+.item-card {
+    background: var(--card-bg);
+    backdrop-filter: blur(5px);
+    border-radius: 16px;
+    padding: 22px;
+    border: 1px solid rgba(226, 232, 240, 0.8);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.04);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.item-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 14px 30px rgba(13, 59, 102, 0.12);
+    border-color: #0a9396;
+}
+
+.item-card h3, .item-card h4 {
+    color: var(--primary-color);
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+
+.item-card p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    margin-bottom: 8px;
+}
+
+.item-card .btn {
+    display: block;
+    text-align: center;
+    background: linear-gradient(135deg, #0a9396 0%, #005f73 100%);
+    color: white;
+    padding: 10px;
+    text-decoration: none;
+    border-radius: 8px;
+    margin-top: 15px;
+    font-weight: 700;
+    transition: background 0.3s ease;
+}
+
+.item-card .btn:hover {
+    background: linear-gradient(135deg, #005f73 0%, #0a9396 100%);
+}
+
+/* شارات رقيقة لحالة الأداة */
+.status-badge {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+    width: fit-content;
+}
+
+.status-badge.available {
+    background-color: #e6fffa;
+    color: #047857;
+    border: 1px solid #34d399;
+}
+
+/* حاويات البيانات والفورم (إضافة أداة / حسابي) */
+.form-container, .profile-container {
+    background: var(--card-bg);
+    backdrop-filter: blur(5px);
+    width: 90%;
+    max-width: 650px;
+    margin: 40px auto;
+    padding: 35px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+    border: 1px solid #e2e8f0;
+}
+
+.form-container h2, .user-info h2 {
+    color: var(--primary-color);
+    border-bottom: 3px solid #ee9b00;
+    display: inline-block;
+    padding-bottom: 5px;
+    margin-bottom: 25px;
+}
+
+.user-info p {
+    font-size: 1.05rem;
+    padding: 8px 0;
+    border-bottom: 1px dashed #edf2f7;
+}
+
+.user-info p strong {
+    color: #0a9396;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: var(--primary-color);
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    padding: 12px 15px;
+    border: 1.5px solid #cbd5e0;
+    border-radius: 10px;
+    font-size: 0.98rem;
+    background-color: #f8fafc;
+    transition: all 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    background-color: #ffffff;
+    border-color: #0a9396;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(10, 147, 150, 0.15);
+}
+
+.btn-submit {
+    width: 100%;
+    background: linear-gradient(135deg, #ee9b00 0%, #ca6702 100%);
+    color: white;
+    padding: 14px;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(238, 155, 0, 0.3);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-submit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(238, 155, 0, 0.4);
+}
+
+footer {
+    background-color: #0d3b66;
+    color: #e2e8f0;
+    text-align: center;
+    padding: 18px;
+    margin-top: auto;
+    font-size: 0.95rem;
+}
