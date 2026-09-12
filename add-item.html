@@ -3,77 +3,78 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>إضافة أداة جديدة - EngiShare</title>
-    <link rel="stylesheet" href="style.css">
+    <title>سلفني شكراً - إضافة أداة</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.rtl.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
 
     <header>
-        <div class="logo">EngiShare 🛠️</div>
+        <div class="logo">سلفني شكراً 🛠️</div>
         <nav>
-            <a href="index.html">الرئيسية</a>
-            <a href="add-item.html">إضافة أداة</a>
-            <a href="profile.html">حسابي</a>
+            <a href="{{ url_for('home') }}">الرئيسية</a>
+            <a href="{{ url_for('add_item') }}">إضافة أداة</a>
+            <a href="{{ url_for('profile') }}">حسابي</a>
         </nav>
     </header>
 
-    <main class="form-container">
-        <h2>إضافة أداة هندسية للتبادل أو الإعارة</h2>
+    <main class="container my-5" style="max-width: 600px;">
+        <h2 class="text-center mb-4">إضافة أداة جديدة</h2>
 
-        <form action="#" method="POST" enctype="multipart/form-data">
-            <div class="form-group">
-                <label for="title">اسم الأداة:</label>
-                <input type="text" id="title" name="title" required placeholder="مثال: لوحة رسم هندسي A1">
+        <!-- أهم نقطة: method="POST" و action برابط الدالة -->
+        <form action="{{ url_for('add_item') }}" method="POST" class="card p-4 shadow-sm">
+
+            <!-- 1. عنوان الأداة -->
+            <div class="mb-3">
+                <label class="form-label">اسم الأداة</label>
+                <input type="text" name="title" class="form-control" placeholder="مثال: مسطرة حرف T، أفوميتر..." required>
             </div>
 
-            <div class="form-group">
-                <label for="category">التصنيف / القسم:</label>
-                <select id="category" name="category" required>
-                    <option value="">اختر القسم</option>
-                    <option value="general">إعدادي هندسة</option>
-                    <option value="architecture">عمارة</option>
-                    <option value="civil">مدني</option>
-                    <option value="electrical">كهرباء وحاسبات</option>
-                    <option value="mechanical">ميكانيكا</option>
+            <!-- 2. القسم الهندسي -->
+            <div class="mb-3">
+                <label class="form-label">القسم الهندسي</label>
+                <select name="category" class="form-select" required>
+                    <option value="" disabled selected>اختر القسم...</option>
+                    <option value="إعدادي هندسة">إعدادي هندسة</option>
+                    <option value="عمارة">عمارة</option>
+                    <option value="مدني">مدني</option>
+                    <option value="كهرباء / حاسبات">كهرباء / حاسبات</option>
+                    <option value="ميكانيكا">ميكانيكا</option>
                 </select>
             </div>
 
-            <div class="form-group">
-                <label for="listing_type">نوع العرض:</label>
-                <select id="listing_type" name="listing_type" required>
-                    <option value="borrow">إعارة مجانية</option>
-                    <option value="sell">بيع بسعر رمزي</option>
-                    <option value="exchange">تبادل بأداة أخرى</option>
+            <!-- 3. نوع العرض -->
+            <div class="mb-3">
+                <label class="form-label">نوع العرض</label>
+                <select name="listing_type" class="form-select" required>
+                    <option value="" disabled selected>اختر نوع العرض...</option>
+                    <option value="إعارة مجانية">إعارة مجانية</option>
+                    <option value="إعارة بسعر رمزي">إعارة بسعر رمزي</option>
+                    <option value="بيع بسعر رمزي">بيع بسعر رمزي</option>
+                    <option value="تبادل بأداة أخرى">تبادل بأداة أخرى</option>
                 </select>
             </div>
 
-            <div class="form-group">
-                <label for="price">السعر (إذا كان بيع):</label>
-                <input type="number" id="price" name="price" placeholder="0.00">
+            <!-- 4. السعر -->
+            <div class="mb-3">
+                <label class="form-label">السعر (إذا كان مجاناً اتركه فارغاً)</label>
+                <input type="text" name="price" class="form-control" placeholder="مثال: مجاناً، 20 جنيه/يوم...">
             </div>
 
-            <div class="form-group">
-                <label for="condition">حالة الأداة:</label>
-                <select id="condition" name="condition" required>
-                    <option value="new">جديدة لم تستخدم</option>
-                    <option value="like_new">شبه جديدة</option>
-                    <option value="used">مستعملة بحالة جيدة</option>
-                </select>
+            <!-- 5. الوصف -->
+            <div class="mb-3">
+                <label class="form-label">وصف الأداة وحالتها</label>
+                <textarea name="description" class="form-control" rows="3" placeholder="اكتب تفاصيل الأداة وحالتها وكيفية التواصل..." required></textarea>
             </div>
 
-            <div class="form-group">
-                <label for="description">وصف الأداة:</label>
-                <textarea id="description" name="description" rows="5" placeholder="اكتب تفاصيل الأداة، مكان التسليم داخل الكلية..."></textarea>
-            </div>
-
-            <div class="form-group">
-                <label for="images">صور الأداة:</label>
-                <input type="file" id="images" name="images" multiple accept="image/*">
-            </div>
-
-            <button type="submit" class="btn-submit">نشر الأداة</button>
+            <!-- زرار الإرسال المهم جداً -->
+            <button type="submit" class="btn btn-primary w-100">نشر الأداة</button>
         </form>
     </main>
+
+    <footer class="text-center py-3 mt-5 border-top">
+        <p class="mb-0">جميع الحقوق محفوظة &copy; 2026 - سلفني شكراً</p>
+    </footer>
 
 </body>
 </html>
