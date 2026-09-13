@@ -4,51 +4,44 @@ from flask import Flask, render_template, request, redirect, url_for
 app = Flask(__name__)
 db = SQL("sqlite:///project.db")
 
-# 1. الصفحة الرئيسية (البحث والتصفية)
+# 1. الصفحة الرئيسية (تصفح الأدوات المتاحة والبحث)
 @app.route('/')
 def home():
     q = request.args.get('q', '').strip()
     category = request.args.get('category', '')
-    listing_type = request.args.get('listing_type', '')
 
-    query = "SELECT * FROM items WHERE 1=1"
+    query = "SELECT items.*, users.username FROM items JOIN users ON items.user_id = users.id WHERE items.status = 'available'"
     params = []
 
     if q:
-        query += " AND (title LIKE ? OR description LIKE ?)"
+        query += " AND (items.title LIKE ? OR items.description LIKE ?)"
         params.append(f"%{q}%")
         params.append(f"%{q}%")
 
     if category and category != "all":
-        query += " AND category = ?"
+        query += " AND items.category = ?"
         params.append(category)
 
-    if listing_type and listing_type != "all":
-        query += " AND listing_type = ?"
-        params.append(listing_type)
-
-    query += " ORDER BY id DESC"
+    query += " ORDER BY items.id DESC"
 
     items = db.execute(query, *params)
     return render_template('index.html', items=items)
 
 
-# 2. إضافة أداة
+# 2. إضافة أداة جديدة
 @app.route('/add-item', methods=['GET', 'POST'])
 def add_item():
     if request.method == 'POST':
         title = request.form.get('title')
         category = request.form.get('category')
-        listing_type = request.form.get('listing_type')
-        price = request.form.get('price')
         description = request.form.get('description')
 
-        if not price or not price.strip():
-            price = "مجاناً"
+        # استخدام user_id = 1 مؤقتاً لحين إضافة نظام تسجيل الدخول (Sessions)
+        user_id = 1
 
         db.execute(
-            "INSERT INTO items (title, category, listing_type, price, description) VALUES (?, ?, ?, ?, ?)",
-            title, category, listing_type, price, description
+            "INSERT INTO items (user_id, title, category, description) VALUES (?, ?, ?, ?)",
+            user_id, title, category, description
         )
 
         return redirect(url_for('home'))
@@ -56,31 +49,58 @@ def add_item():
     return render_template('add-item.html')
 
 
-# 3. صفحة الحساب الشخصي
+# 3. صفحة الملف الشخصي (عرض أدوات المستخدم وطلباته)
 @app.route('/profile')
 def profile():
-    user_name = request.args.get('user_name', 'آلاء')
-    user_email = request.args.get('user_email', 'student@eng.edu.eg')
-    user_dept = request.args.get('user_dept', 'هندسة حاسبات / كهرباء')
+    user_id = 1  # مستخدم افتراضي حالياً
 
-    items = db.execute("SELECT * FROM items ORDER BY id DESC")
-    return render_template('profile.html', items=items, user_name=user_name, user_email=user_email, user_dept=user_dept)
+    user = db.execute("SELECT * FROM users WHERE id = ?", user_id)
+    my_items = db.execute("SELECT * FROM items WHERE user_id = ? ORDER BY id DESC", user_id)
+
+    # جلب الطلبات المقدمة على أدوات هذا المستخدم
+    my_requests = db.execute("""
+        SELECT requests.id AS request_id, items.title, users.username AS requester_name, requests.status
+        FROM requests
+        JOIN items ON requests.item_id = items.id
+        JOIN users ON requests.requester_id = users.id
+        WHERE items.user_id = ?
+    """, user_id)
+
+    return render_template('profile.html', user=user[0] if user else None, items=my_items, requests=my_requests)
 
 
-# 4. دالة الحذف (تنفذ أمر الحذف وتنعش الصفحة)
+# 4. تفاصيل أداة + إمكانية طلبها
+@app.route('/item/<int:item_id>')
+def item_details(item_id):
+    items = db.execute("""
+        SELECT items.*, users.username, users.phone, users.department
+        FROM items
+        JOIN users ON items.user_id = users.id
+        WHERE items.id = ?
+    """, item_id)
+
+    if items:
+        return render_template('item-details.html', item=items[0])
+    return redirect(url_for('home'))
+
+
+# 5. إرسال طلب استعارة/تبادل لأداة
+@app.route('/request-item/<int:item_id>', methods=['POST'])
+def request_item(item_id):
+    requester_id = 1  # المستخدم الحالي
+
+    db.execute(
+        "INSERT INTO requests (item_id, requester_id) VALUES (?, ?)",
+        item_id, requester_id
+    )
+    return redirect(url_for('profile'))
+
+
+# 6. حذف أداة
 @app.route('/delete-item/<int:item_id>', methods=['POST'])
 def delete_item(item_id):
     db.execute("DELETE FROM items WHERE id = ?", item_id)
     return redirect(url_for('profile'))
-
-
-# 5. تفاصيل الأداة
-@app.route('/item/<int:item_id>')
-def item_details(item_id):
-    items = db.execute("SELECT * FROM items WHERE id = ?", item_id)
-    if items:
-        return render_template('item-details.html', item=items[0])
-    return redirect(url_for('home'))
 
 
 if __name__ == '__main__':
