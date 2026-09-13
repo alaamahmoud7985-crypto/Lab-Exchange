@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>سلفني شكراً - الرئيسية</title>
+    <!-- Bootstrap 5 RTL -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.rtl.min.css">
+    <!-- ربط الـ CSS الخاص بـ Flask -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <header>
+        <div class="logo">سلفني شكراً 🛠️</div>
+        <nav>
+            <a href="{{ url_for('home') }}">الرئيسية</a>
+            <a href="{{ url_for('add_item') }}">إضافة أداة</a>
+            <a href="{{ url_for('profile') }}">حسابي</a>
+        </nav>
+    </header>
+
+    <main>
+        <!-- قسم البحث والتصفية -->
+        <section class="search-section">
+            <h1>تبادل واستعارة الأدوات الهندسية بكل سهولة</h1>
+            <form class="search-form" action="{{ url_for('home') }}" method="GET">
+
+                <!-- 1. مربع البحث -->
+                <input type="text" name="q" placeholder="ابحث عن أداة (مسطرة حرف T، أفوميتر...)" />
+
+                <!-- 2. قائمة القسم الهندسي -->
+                <select name="category">
+                    <option value="" disabled selected hidden>اختر القسم الهندسي...</option>
+                    <option value="all">جميع الأقسام</option>
+                    <option value="إعدادي هندسة">إعدادي هندسة</option>
+                    <option value="عمارة">عمارة</option>
+                    <option value="مدني">مدني</option>
+                    <option value="كهرباء / حاسبات">كهرباء / حاسبات</option>
+                    <option value="ميكانيكا">ميكانيكا</option>
+                </select>
+
+                <!-- 3. قائمة نوع العرض -->
+                <select name="listing_type">
+                    <option value="" disabled selected hidden>اختر نوع العرض...</option>
+                    <option value="all">جميع العروض</option>
+                    <option value="إعارة مجانية">إعارة مجانية</option>
+
+                    <option value="بيع بسعر رمزي">بيع بسعر رمزي</option>
+                    <option value="تبادل بأداة أخرى">تبادل بأداة أخرى</option>
+                </select>
+
+                <button type="submit">بحث</button>
+            </form>
+        </section>
+
+        <!-- شبكة عرض الأدوات الديناميكية -->
+        <section class="items-grid">
+            {% for item in items %}
+            <div class="item-card">
+                <h3>{{ item.title }}</h3>
+                <p><strong>القسم:</strong> {{ item.category }}</p>
+                <p><strong>نوع العرض:</strong> {{ item.listing_type }}</p>
+                <p><strong>السعر:</strong> {{ item.price }}</p>
+                <p><strong>الوصف:</strong> {{ item.description }}</p>
+                <a href="{{ url_for('item_details', item_id=item.id) }}" class="btn">عرض التفاصيل</a>
+            </div>
+            {% else %}
+            <!-- تظهر هذه الرسالة فقط إذا كانت قاعدة البيانات خالية -->
+            <p style="text-align: center; grid-column: 1 / -1; padding: 20px;">لا توجد أدوات مضافة حتى الآن. كوني أول من يضيف أداة!</p>
+            {% endfor %}
+        </section>
+    </main>
+
+    <footer>
+        <p class="mb-0">جميع الحقوق محفوظة &copy; 2026 - سلفني شكراً</p>
+    </footer>
+
+</body>
+</html>
