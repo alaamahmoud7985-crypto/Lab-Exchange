@@ -31,3 +31,4 @@ CREATE TABLE reviews (
     FOREIGN KEY (reviewer_id) REFERENCES users(id),
     FOREIGN KEY (target_user_id) REFERENCES users(id)
 );
+
