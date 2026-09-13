@@ -1,58 +1,27 @@
-# Salefny Shokran (سلفني شكراً)
-#### Video Demo: <URL HERE>
+# Salafni Shokran (سلفني شكراً)
+#### Video Demo: [أدخلي رابط فيديو اليوتيوب هنا]
 #### Description:
 
-**Salefny Shokran** (Arabic for *"Lend Me, Thank You"*) is a web-based community platform designed specifically for engineering students to share, borrow, buy, and exchange study tools and lab equipment (such as T-squares, multimeters, drawing sets, and calculators).
+**Salafni Shokran** (Borrow Me, Thank You) is a web application built as the final project for CS50. The project was collaboratively designed and developed by **Nourhan Ahmed** and **Alaa Mahmoud** from Egypt.
 
-The application is built to solve a very common problem among engineering students: purchasing expensive tools that are only needed for a single semester or laboratory experiment.
+### Project Overview
+Engineering students often require expensive drawing tools, calculators, and specialized equipment for specific semesters. **Salafni Shokran** provides a centralized, dedicated platform for engineering students to exchange, sell, or donate their tools easily within their academic community.
 
-### Features
-- **Dynamic Homepage & Search:** Users can browse all available engineering items or filter them dynamically using keywords, engineering departments (e.g., General Engineering, Architecture, Civil, Electrical/Computers, Mechanical), or listing types (Free Borrowing, Paid Borrowing, Selling, Exchanging).
-- **Add New Item:** A dedicated form allowing students to submit new items to the marketplace with details including title, category, listing type, price, and description.
-- **Dynamic Profile Management:** A simple profile page where students can manage their personal identity (Name, Department, University Email) without needing a complex multi-user database setup.
-- **Item Deletion:** Students can remove their own items directly from their profile page with real-time database updating.
-- **Item Details:** A specialized view to display complete information about a specific tool.
+### Key Features
+* **Browse & Filter Items:** Students can view all listed engineering tools on the homepage and filter them by category or listing type (Sale, Exchange, Donation).
+* **Search Functionality:** Dynamic search bar allowing users to find specific equipment by title or description keywords.
+* **Add New Items:** A dedicated form for users to list tools, specifying title, category, price, condition, and detailed description.
+* **Item Details & Contact:** Detailed view for each item displaying description, condition, and an integrated **WhatsApp direct link** to quickly contact the item owner.
+* **User Profile & Management:** A profile dashboard showing user details and listed tools, with options to delete listings once sold or exchanged.
 
----
+### File Architecture
+* `app.py`: The core Flask application handling request routing, database queries, and dynamic rendering.
+* `project.db`: The SQLite database containing relational tables for `users`, `items`, `requests`, and `reviews`.
+* `schema.sql`: Contains the database structure and SQL table creation queries.
+* `templates/`: Directory housing HTML views (`index.html`, `add-item.html`, `item-details.html`, `profile.html`).
+* `static/`: Contains `style.css` for application styling and layout responsiveness.
 
-### Tech Stack & Architecture
-- **Backend:** Python 3, Flask framework.
-- **Database:** SQLite (`project.db`) using CS50's SQL module.
-- **Frontend:** HTML5, CSS3, JavaScript, Jinja2 templating, Bootstrap 5 (RTL configuration for Arabic support).
-
----
-
-### File Structure & Functionality
-
-#### `app.py`
-The primary Python script driving the Flask backend. It contains the application route handlers and database queries:
-- `/`: Renders `index.html` with dynamic search and filtering queries using SQL `LIKE` and parameterized conditions.
-- `/add-item`: Processes `POST` requests to insert new engineering equipment into the `items` table in SQLite.
-- `/profile`: Handles displaying user information and fetching the current student's listed tools.
-- `/delete-item/<int:item_id>`: Handles deletion requests to execute `DELETE` queries in the database and redirect back to the profile.
-- `/item/<int:item_id>`: Fetches a single item's detailed information by its primary key (`id`).
-
-#### `project.db`
-The SQLite database containing the core table `items`, which stores:
-- `id` (INTEGER, Primary Key)
-- `title` (TEXT)
-- `category` (TEXT)
-- `listing_type` (TEXT)
-- `price` (TEXT)
-- `description` (TEXT)
-
-#### `templates/`
-- **`index.html`**: The main landing page featuring the search bar, category filters, and a dynamic Jinja2 grid loop rendering all items stored in the database.
-- **`add-item.html`**: Form interface for inputting tool details.
-- **`profile.html`**: User profile displaying student details, live-update fields, and an item management list with interactive delete confirmation prompts.
-- **`item-details.html`**: View template displaying extended information for an individual item.
-
-#### `static/`
-- **`style.css`**: Custom styling rules extending Bootstrap 5 RTL to achieve an engineering-themed marketplace interface.
-
----
-
-### How to Run the Application
-1. Clone the repository and navigate to the project directory:
-   ```bash
-   cd project
+### Authors
+* **Norhan Ahmed**
+* **Alaa Mahmoud**
+*
