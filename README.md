@@ -1,5 +1,5 @@
 # Salafni Shokran (سلفني شكراً)
-#### Video Demo: [أدخلي رابط فيديو اليوتيوب هنا]
+#### Video Demo: [https://youtu.be/OhoDFXx229s?si=Po6GpCFz8KEA9QC1]
 #### Description:
 
 **Salafni Shokran** (Borrow Me, Thank You) is a web application built as the final project for CS50. The project was collaboratively designed and developed by **Nourhan Ahmed** and **Alaa Mahmoud** from Egypt.
