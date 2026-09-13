@@ -22,14 +22,36 @@
 
     <main class="form-container">
         <h2>تفاصيل الأداة</h2>
-        <div class="item-card">
-            <h3>مسطرة حرف T ألماني 100سم</h3>
-            <p><strong>القسم:</strong> عمارة / مدني</p>
-            <p><strong>نوع العرض:</strong> إعارة مجانية</p>
-            <p><strong>حالة الأداة:</strong> ممتازة بحالة الجديد</p>
-            <p><strong>الوصف:</strong> مسطرة خشبية بحالة جيدة جداً للتسليم داخل مبنى عمارة.</p>
-            <a href="https://wa.me/201000000000" target="_blank" class="btn">التواصل مع صاحب الأداة (واتساب)</a>
-        </div>
+      <div class="item-details-container">
+    <h2>تفاصيل الأداة</h2>
+
+    <!-- عنوان الأداة -->
+    <h1>{{ item.title }}</h1>
+
+    <div class="info-section">
+        <!-- القسم والكلية -->
+        <p><strong>القسم:</strong> {{ item.category }} / {{ item.department }}</p>
+
+        <!-- حالة الأداة -->
+        <p><strong>الحالة:</strong> {{ item.status }}</p>
+
+        <!-- وصف الأداة -->
+        <p><strong>الوصف:</strong> {{ item.description }}</p>
+
+        <!-- اسم المالك -->
+        <p><strong>صاحب الأداة:</strong> {{ item.username }}</p>
+    </div>
+
+    <!-- زر التواصل عبر الواتساب -->
+    {% if item.phone %}
+        <a href="https://wa.me/2{{ item.phone }}" target="_blank" class="whatsapp-btn">
+            التواصل مع صاحب الأداة (واتساب)
+        </a>
+    {% endif %}
+
+    <br><br>
+    <a href="{{ url_for('home') }}">العودة للرئيسية</a>
+</div>
     </main>
 
     <footer>
