@@ -18,7 +18,7 @@ Engineering students often require expensive drawing tools, calculators, and spe
 * `app.py`: The core Flask application handling request routing, database queries, and dynamic rendering.
 * `project.db`: The SQLite database containing relational tables for `users`, `items`, `requests`, and `reviews`.
 * `schema.sql`: Contains the database structure and SQL table creation queries.
-* `templates/`: Directory housing HTML views (`index.html`, `add-item.html`, `item-details.html`, `profile.html`).
+* `templates/`: Directory housing HTML views (`index.html`, `add-item.html`, `item-details.html`, `profile.html`)..
 * `static/`: Contains `style.css` for application styling and layout responsiveness.
 
 ### Authors
